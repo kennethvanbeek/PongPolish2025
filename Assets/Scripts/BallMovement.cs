@@ -51,7 +51,7 @@ public class BallMovement : MonoBehaviour
 
     void SetForce(float pForce, float pSpeed)
     {
-        float verticalSpeed = rb.velocity.y;
+        float verticalSpeed = rb.linearVelocity.y;
 
         if (verticalSpeed < 1 && verticalSpeed > -1)
             verticalSpeed = Random.Range(1, 3) * ((Random.Range(0, 2) == 0) ? 1 : -1);
@@ -60,7 +60,7 @@ public class BallMovement : MonoBehaviour
         verticalSpeed += pSpeed;
         verticalSpeed = Mathf.Clamp(verticalSpeed, -maxVerticalSpeed, maxVerticalSpeed);
 
-        rb.velocity = new(rb.velocity.x, verticalSpeed);
+        rb.linearVelocity = new(rb.linearVelocity.x, verticalSpeed);
         rb.AddForce(new Vector3(pForce, pSpeed, 0));
     }
 
