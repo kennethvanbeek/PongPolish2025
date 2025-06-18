@@ -496,6 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 760442821}
   - component: {fileID: 760442820}
+  - component: {fileID: 760442822}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -531,6 +532,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &760442822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 760442819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8069d602141ef4e9fa26ceec6bf61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &983938420
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de25c8d8c3b801440a6322f37fbfc0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpeed: 20
   yClampValue: 7.5
   playerInputName: VerticalPlayerOne
 --- !u!212 &1049173045
@@ -1350,6 +1364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de25c8d8c3b801440a6322f37fbfc0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpeed: 20
   yClampValue: 7.5
   playerInputName: VerticalPlayerTwo
 --- !u!212 &1399316496
