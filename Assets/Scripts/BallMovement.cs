@@ -84,7 +84,6 @@ public class BallMovement : MonoBehaviour
     {
         rb.Sleep();
         rb.WakeUp();
-        rb.isKinematic = true;
         randInt = _p;
 
         yield return new WaitForSeconds(ballResetDelay);
@@ -106,7 +105,6 @@ public class BallMovement : MonoBehaviour
     {
         transform.parent = null;
         isPlaying = true;
-        rb.isKinematic = false;
 
         float _ballVelocity = (randInt == 1) ? ballVelocity : -ballVelocity;
         rb.AddForce(new Vector3(_ballVelocity, Random.Range(-2000, 2000), 0));
