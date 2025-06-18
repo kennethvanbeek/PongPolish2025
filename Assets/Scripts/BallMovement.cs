@@ -9,15 +9,12 @@ public class BallMovement : MonoBehaviour
     Rigidbody2D rb = null;
     bool isPlaying = false;
     int randInt = 0;
-
     int extraForce = 150;
-
     [SerializeField] TMP_Text[] playerScoreText = null;
     int[] playerScoreNumber = { 0, 0 };
 
     float ballDirSpeedP1 = 0;
     float ballDirSpeedP2 = 0;
-
     float dirSpeedMultiplier = 5f;
 
     [SerializeField] GameObject leftWall = null;
@@ -27,13 +24,9 @@ public class BallMovement : MonoBehaviour
     [SerializeField] GameObject rightPlayer = null;
 
     float maxVerticalSpeed = 30;
-
     float ballResetDelay = 2;
 
-    public bool IsPlaying()
-    {
-        return isPlaying;
-    }
+    public bool IsPlaying() { return isPlaying; }
 
     void Awake()
     {
@@ -44,9 +37,15 @@ public class BallMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject == leftPlayer)
+        {
             SetForce(extraForce, ballDirSpeedP2);
+            EventManager.Instance?.PaddleHit(leftPlayer);
+        }
         else if (collision.gameObject == rightPlayer)
+        {
             SetForce(-extraForce, ballDirSpeedP1);
+            EventManager.Instance?.PaddleHit(rightPlayer);
+        }
     }
 
     void SetForce(float pForce, float pSpeed)
@@ -55,7 +54,6 @@ public class BallMovement : MonoBehaviour
 
         if (verticalSpeed < 1 && verticalSpeed > -1)
             verticalSpeed = Random.Range(1, 3) * ((Random.Range(0, 2) == 0) ? 1 : -1);
-
 
         verticalSpeed += pSpeed;
         verticalSpeed = Mathf.Clamp(verticalSpeed, -maxVerticalSpeed, maxVerticalSpeed);
@@ -77,6 +75,10 @@ public class BallMovement : MonoBehaviour
     {
         playerScoreNumber[_player]++;
         playerScoreText[_player].text = playerScoreNumber[_player].ToString();
+
+        // ROEP EVENT
+        EventManager.Instance?.Score(_player);
+
         StartCoroutine(ResetBall(_player));
     }
 
@@ -91,6 +93,9 @@ public class BallMovement : MonoBehaviour
 
         transform.position = new Vector3(0, 0, 0);
         isPlaying = false;
+
+        // ROEP EVENT
+        EventManager.Instance?.BallReset();
     }
 
     void Update()
@@ -110,6 +115,9 @@ public class BallMovement : MonoBehaviour
 
         float _ballVelocity = (randInt == 1) ? ballVelocity : -ballVelocity;
         rb.AddForce(new Vector3(_ballVelocity, Random.Range(-2000, 2000), 0));
+
+        // ROEP EVENT
+        EventManager.Instance?.BallLaunched();
     }
 
     int RndNmbr(int _x, int _y)
@@ -117,4 +125,3 @@ public class BallMovement : MonoBehaviour
         return Random.Range(_x, _y);
     }
 }
-
