@@ -6,8 +6,10 @@ public class StartGameText : MonoBehaviour
 
     void ShowInfoText() => playText.SetActive(true);
     void HideInfoText() => playText.SetActive(false);
- 
-    void OnEnable()
+
+    private void Awake() => Application.targetFrameRate = 60;
+        
+    void Start()
     {
         EventManager.Instance.OnBallLaunched += HideInfoText;
         EventManager.Instance.OnBallReset += ShowInfoText;

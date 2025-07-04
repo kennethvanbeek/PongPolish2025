@@ -21,21 +21,15 @@ public class BallMovement : MonoBehaviour
         playerKickoff = Random.Range(1, 3);
     }
 
-    void OnEnable()
+    void Start()
     {
-        if (EventManager.Instance != null)
-        {
-            EventManager.Instance.OnBallLaunched += ShootBall;
-            EventManager.Instance.OnScore += SetScore;
-        }
+        EventManager.Instance.OnBallLaunched += ShootBall;
+        EventManager.Instance.OnScore += SetScore;
     }
     void OnDisable()
     {
-        if (EventManager.Instance != null)
-        {
-            EventManager.Instance.OnBallLaunched -= ShootBall;
-            EventManager.Instance.OnScore -= SetScore;
-        }
+        EventManager.Instance.OnBallLaunched -= ShootBall;
+        EventManager.Instance.OnScore -= SetScore;
     }
 
     void Update()
